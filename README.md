@@ -64,7 +64,7 @@ This project is part of a hands-on Flutter learning practice and showcases a str
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/notes_app.git
+    git clone https://github.com/whonikhilsethi/notes_app.git
     cd notes_app
     ```
 
@@ -103,8 +103,7 @@ This project is part of a hands-on Flutter learning practice and showcases a str
 ## 📧 Contact
 
 For any questions or inquiries, feel free to reach out via email:  
-**nikhilsethi2k3@gmail.com**
-
+📩 **nikhilsethi2k3@gmail.com**  
 🔗 GitHub: [github.com/whonikhilsethi](https://github.com/whonikhilsethi)
 
 ---
@@ -120,3 +119,4 @@ For any questions or inquiries, feel free to reach out via email:
 ---
 
 ⭐ *If you found this project useful, consider giving it a ⭐ on GitHub!*
+
