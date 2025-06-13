@@ -65,23 +65,23 @@ class DBHelper {
   Future<bool> updateNote({
     required String mtitle,
     required String mdesc,
-    required int s_no,
+    required int sno,
   }) async {
     var db = await getDB();
     int rowsEffected = await db.update(TABLE_NOTE, {
       COLUMN_NOTE_TITLE: mtitle,
       COLUMN_NOTE_DESC: mdesc,
-    }, where: "$COLUMN_NOTE_SNO= $s_no");
+    }, where: "$COLUMN_NOTE_SNO= $sno");
     return rowsEffected > 0;
   }
 
   //DELETING THE DATA
-  Future<bool> deleteNote({required int s_no}) async {
+  Future<bool> deleteNote({required int sno}) async {
     var db = await getDB();
     int rowsEffected = await db.delete(
       TABLE_NOTE,
-      where: "$COLUMN_NOTE_SNO= ?",
-      whereArgs: ["$s_no"],
+      where: "$COLUMN_NOTE_SNO= $sno",
+      whereArgs: ["sno"],
     );
     return rowsEffected > 0;
   }

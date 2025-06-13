@@ -1,5 +1,9 @@
+import 'package:db_practice/add_note_page.dart';
 import 'package:db_practice/data/local/db_helper.dart';
+import 'package:db_practice/db_provider.dart';
+import 'package:db_practice/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,22 +15,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  List<Map<String, dynamic>> allNotes = [];
-  DBHelper? dbRef;
+  //List<Map<String, dynamic>> allNotes = [];
+  // DBHelper? dbRef;
   @override
   void initState() {
     super.initState();
-    dbRef = DBHelper.getInstance();
-    getNotes();
+    Provider.of<DbProvider>(context, listen: false).getInitialNotes();
+    /*dbRef = DBHelper.getInstance();
+    getNotes();*/
   }
 
-  void getNotes() async {
+  /*void getNotes() async {
     allNotes = await dbRef!.getAllNotes();
     setState(() {});
   } //fetching data
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +38,43 @@ class _HomePageState extends State<HomePage> {
           'NOTES',
           style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          PopupMenuButton(
+            borderRadius: BorderRadius.circular(50),
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SettingsPage()),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.settings),
+                      SizedBox(width: 8),
+                      Text(
+                        'Settings',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ];
+            },
+          ),
+        ],
       ),
       // all notes viewed here
-      body:
-          allNotes.isNotEmpty
+      body: Consumer<DbProvider>(
+        builder: (ctx, provider, __) {
+          List<Map<String, dynamic>> allNotes = provider.getNotes();
+          return allNotes.isNotEmpty
               ? ListView.builder(
                 itemCount: allNotes.length,
                 itemBuilder: (_, index) {
@@ -54,7 +90,25 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           InkWell(
                             onTap: () {
-                              showModalBottomSheet(
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => AddNotePage(
+                                        isUpdate: true,
+                                        title:
+                                            allNotes[index][DBHelper
+                                                .COLUMN_NOTE_TITLE],
+                                        desc:
+                                            allNotes[index][DBHelper
+                                                .COLUMN_NOTE_DESC],
+                                        s_no:
+                                            allNotes[index][DBHelper
+                                                .COLUMN_NOTE_SNO],
+                                      ),
+                                ),
+                              );
+                              /*showModalBottomSheet(
                                 context: context,
                                 builder: (context) {
                                   titleController.text =
@@ -70,20 +124,9 @@ class _HomePageState extends State<HomePage> {
                                             .COLUMN_NOTE_SNO],
                                   );
                                 },
-                              );
+                              );*/
                             },
                             child: Icon(Icons.edit),
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              bool check = await dbRef!.deleteNote(
-                                s_no: allNotes[index][DBHelper.COLUMN_NOTE_SNO],
-                              );
-                              if (check == true) {
-                                getNotes();
-                              }
-                            },
-                            child: Icon(Icons.delete, color: Colors.black),
                           ),
                         ],
                       ),
@@ -91,17 +134,24 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               )
-              : Center(child: Text('NO NOTES YET')),
+              : Center(child: Text('NO NOTES YET'));
+        },
+      ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          showModalBottomSheet(
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddNotePage()),
+          );
+          /*showModalBottomSheet(
             context: context,
             builder: (context) {
               titleController.clear();
               descriptionController.clear();
               return getBottomSheetWidget();
             },
-          );
+          );*/
         },
 
         //note to be added over here
@@ -110,7 +160,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget getBottomSheetWidget({bool isUpdate = false, int s_no = 0}) {
+  /*Widget getBottomSheetWidget({bool isUpdate = false, int s_no = 0}) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(11),
@@ -200,5 +250,5 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-  }
+  }*/
 }

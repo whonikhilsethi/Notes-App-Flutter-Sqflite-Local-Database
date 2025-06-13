@@ -1,9 +1,22 @@
 import 'package:db_practice/data/local/db_helper.dart';
+import 'package:db_practice/db_provider.dart';
 import 'package:db_practice/home_page.dart';
+import 'package:db_practice/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => DbProvider(dbHelper: DBHelper.getInstance()),
+        ),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,6 +27,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     DBHelper db = DBHelper.getInstance();
 
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+    return MaterialApp(
+      themeMode:
+          context.watch<ThemeProvider>().getThemeValue()
+              ? ThemeMode.dark
+              : ThemeMode.light,
+      darkTheme: ThemeData.dark(),
+
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
   }
 }
