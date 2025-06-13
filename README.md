@@ -64,8 +64,8 @@ This project is part of a hands-on Flutter learning practice and showcases a str
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/whonikhilsethi/Notes-App-Flutter-Sqflite-Local-Database.git
-    cd Notes-App-Flutter-Sqflite-Local-Database
+    git clone https://github.com/whonikhilsethi/notes-app-flutter-sqflite-local-database.git
+    cd notes-app-flutter-sqflite-local-database
     ```
 
 2. **Install dependencies:**
