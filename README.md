@@ -1,16 +1,26 @@
-# db_practice
+# 🗒️ Notes App
 
-A new Flutter project.
+A clean and minimal **Flutter Notes App** that allows users to **add, update, and delete notes locally** using the **SQLite database**. This app also supports **Dark Mode** and uses the **Provider** package for state management.
 
-## Getting Started
+## 📱 Features
 
-This project is a starting point for a Flutter application.
+- ✅ Add new notes
+- 📝 Edit existing notes
+- 🗑️ Delete notes
+- 💾 Data stored locally using SQLite
+- 🌙 Dark Mode support
+- 📂 Organized folder structure
+- 🧠 State management with Provider
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter** 🐦
+- **Dart** 💻
+- **SQLite** 🗃️ (via `sqflite` package)
+- **Provider** 🔄 for state management
+- **Responsive UI** 📱
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🌆 Screenshots
+
+<div align="left"> <img src="assets/ss1.png" width="220"/> <img src="assets/ss2.png" width="220"/> <img src="assets/ss3.png" width="220"/> <br><br> <img src="assets/ss4.png" width="220"/> <img src="assets/ss5.png" width="220"/> <img src="assets/ss6.png" width="220"/> </div>
+
